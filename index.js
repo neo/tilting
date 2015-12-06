@@ -1,12 +1,13 @@
 var app = require('express')();
+var server = require('http').Server(app);
+var io = require('socket.io')(server);
+
+server.listen(3000);
 
 app.get('/', function (req, res) {
-	res.send('<h1>Hello world</h1>');
+	res.sendFile(__dirname + '/index.html');
 });
 
-var server = app.listen(3000, function () {
-	var host = server.address().address;
-	var port = server.address().port;
-
-	console.log("http://%s:%s", host, port);
-});
+io.on('connection', function (socket) {
+	console.log('a user connected');
+})
