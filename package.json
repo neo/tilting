@@ -1,0 +1,19 @@
+{
+  "name": "first",
+  "version": "1.0.0",
+  "description": "first test",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://neolwc@bitbucket.org/neolwc/first.git"
+  },
+  "author": "Neo",
+  "license": "ISC",
+  "homepage": "https://bitbucket.org/neolwc/first#readme",
+  "dependencies": {
+    "express": "^4.13.3"
+  }
+}
