@@ -42,7 +42,7 @@ function controlHandler () {
 	var canvas = document.getElementById('canvas');
 	canvas.addEventListener('touchstart', pick);
 	canvas.addEventListener('touchmove', pick);
-	canvas.addEventListener('touchend', pick);
+	// canvas.addEventListener('touchend', pick);
 	var ctx = canvas.getContext('2d');
 	function pick (e) {
 		if(e.preventDefault) e.preventDefault();

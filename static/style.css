@@ -20,16 +20,14 @@ html, body {
 	transition: all 0.3s;
 }
 .half:first-child {
-	/*background: #F44336;*/
 	background: #000;
 	color: #fff;
 }
 .half:last-child {
-	/*background: #2196F3;*/
 	background: #fff;
 	color: #000;
 }
-.text {;
+.text {
 	text-transform: uppercase;
 	font-family: sans-serif;
 	/*color: #fff;*/
