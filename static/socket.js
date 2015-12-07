@@ -28,6 +28,16 @@ function controlHandler () {
 		var data = {x: e.beta, y: e.gamma, z: e.alpha};
 		socket.emit('tilt', data);
 	});
+	var x, y, z, i;
+	x = y = z = 0;
+	window.addEventListener('devicemotion', function (e) {
+		i = e.interval;
+		x += e.acceleration.x * i;
+		y += e.acceleration.y * i;
+		z += e.acceleration.z * i;
+		var data = {x: x, y: y, z: z, i: i};
+		socket.emit('wave', data);
+	});
 }
 function monitorHandler (target) {
 	socket.on('tilt', function (data) {
@@ -36,9 +46,17 @@ function monitorHandler (target) {
 		var z = data.z > 180 ? data.z - 360 : data.z;
 		var rgb = 'rgb(' + math(x) + ', ' + math(y) + ', ' + math(z) + ')';
 		target.style.background = rgb;
-		console.log(rgb);
+		// console.log(rgb);
 	});
 	function math (n) {
 		return Math.max(Math.min(Math.round((n * 2 + 180) * (255 / 360)), 255), 0);
 	}
+	var x, y, z, i;
+	socket.on('wave', function (data) {
+		x = data.x;
+		y = data.y;
+		z = data.z;
+		i = data.i;
+		console.log(x,y,z,i);
+	});
 }
