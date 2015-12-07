@@ -14,13 +14,18 @@ function device (e) {
 			var theOther = control;
 			break;
 	}
-	document.querySelectorAll('.text')[0].style.display = 'none';
-	document.querySelectorAll('.text')[1].style.display = 'none';
+	document.querySelectorAll('.text')[0].remove();
+	document.querySelectorAll('.text')[1].remove();
 	if(theOther.offsetWidth == document.body.offsetWidth) {
 		theOther.style.height = 0;
 	} else {
 		theOther.style.width = 0;
 	}
+	var canvas = document.createElement(canvas);
+	canvas.setAttribute('id', 'canvas');
+	canvas.setAttribute('width', window.innerWidth);
+	canvas.setAttribute('height', window.innerHeight);
+	e.currentTarget.appendChild(canvas);
 	e.currentTarget.removeEventListener('click', device);
 }
 function controlHandler () {
