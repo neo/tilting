@@ -19,4 +19,7 @@ io.on('connection', function (socket) {
 	socket.on('tilt', function (data) {
 		socket.broadcast.emit('tilt', data);
 	});
+	socket.on('pick', function (data) {
+		socket.broadcast.emit('pick', data);
+	});
 })
