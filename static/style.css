@@ -17,7 +17,7 @@ html, body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: all 1s;
+	transition: all 0.3s;
 }
 .half:first-child {
 	/*background: #F44336;*/
@@ -35,7 +35,6 @@ html, body {
 	/*color: #fff;*/
 	font-weight: bold;
 	font-size: 2em;
-	transition: all 1s;
 }
 @media screen and (orientation: portrait) {
 	.container {
