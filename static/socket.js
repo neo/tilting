@@ -14,8 +14,8 @@ function device (e) {
 			var theOther = control;
 			break;
 	}
-	document.querySelectorAll('.text')[0].remove();
 	document.querySelectorAll('.text')[1].remove();
+	document.querySelectorAll('.text')[0].remove();
 	if(theOther.offsetWidth == document.body.offsetWidth) {
 		theOther.style.height = 0;
 	} else {
