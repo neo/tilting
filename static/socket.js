@@ -4,13 +4,14 @@ var monitor = document.querySelector('.half:last-child');
 control.addEventListener('click', device);
 monitor.addEventListener('click', device);
 function device (e) {
-	switch (e.currentTarget) {
+	var target = e.currentTarget;
+	switch (target) {
 		case(control):
 			controlHandler();
 			var theOther = monitor;
 			break;
 		case(monitor):
-			monitorHandler(e.currentTarget);
+			monitorHandler(target);
 			var theOther = control;
 			break;
 	}
@@ -21,12 +22,14 @@ function device (e) {
 	} else {
 		theOther.style.width = 0;
 	}
-	var canvas = document.createElement(canvas);
-	canvas.setAttribute('id', 'canvas');
-	canvas.setAttribute('width', window.innerWidth);
-	canvas.setAttribute('height', window.innerHeight);
-	e.currentTarget.appendChild(canvas);
-	e.currentTarget.removeEventListener('click', device);
+	setTimeout(function () {
+		var canvas = document.createElement('canvas');
+		canvas.setAttribute('id', 'canvas');
+		canvas.setAttribute('width', window.innerWidth);
+		canvas.setAttribute('height', window.innerHeight);
+		target.appendChild(canvas);
+	}, 300);
+	target.removeEventListener('click', device);
 }
 function controlHandler () {
 	window.addEventListener('deviceorientation', function (e) {
