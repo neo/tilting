@@ -70,7 +70,11 @@ function controlHandler () {
 		var w = canvas.width;
 		var h = canvas.height;
 		var min = Math.min(w, h);
-		ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
+		// ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
+		// Anti-aliasing
+		ctx.beginPath();
+		ctx.arc(w/2, h/2, min/2, 0, 2*Math.PI);
+		ctx.clip();
 	}
 	window.addEventListener('resize', imgSize);
 	window.addEventListener('deviceorientation', imgRotate);
