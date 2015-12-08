@@ -67,7 +67,7 @@ function monitorHandler (target) {
 		var y = data.y;
 		var z = data.z > 180 ? data.z - 360 : data.z;
 		var rgb = 'rgb(' + math(x) + ', ' + math(y) + ', ' + math(z) + ')';
-		target.style.background = rgb;
+		// target.style.background = rgb;
 		// console.log(rgb);
 	});
 	function math (n) {
