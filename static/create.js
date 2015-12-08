@@ -1,4 +1,5 @@
 var stage, stageW, stageH, art;
+var stroke = 10
 
 function canvas () {
 	stage = new createjs.Stage('canvas');
@@ -17,18 +18,19 @@ function canvas () {
 	art = new createjs.Graphics();
 	stage.addChild(new createjs.Shape(art));
 
-	art.ss(10, 1, 1).mt(stageW/2, stageH/2);
+	art.ss(stroke, 1, 1).mt(stageW/2, stageH/2);
 
 	stage.update();
-	console.log(stage);
 }
 
 var cx, cy, tx, ty;
+var ratio = 5;
+
 function create (x, y, z, rgba) {
 	cx = art.command.x;
 	cy = art.command.y;
-	tx = Math.min(Math.max((cx + y / 5), 0), stageW);
-	ty = Math.min(Math.max((cy + x / 5), 0), stageH);
+	tx = Math.min(Math.max((cx + y / ratio), 0), stageW);
+	ty = Math.min(Math.max((cy + x / ratio), 0), stageH);
 	art.s(rgba).mt(cx, cy).lt(tx, ty);
 	stage.update();
 }
