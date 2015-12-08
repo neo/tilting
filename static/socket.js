@@ -52,14 +52,19 @@ function controlHandler () {
 		var rgba = 'rgba(' + data[0] + ', ' + data[1] + ', ' + data[2] + ', ' + data[3] / 255 + ')';
 		socket.emit('pick', rgba);
 	}
-	var w = document.querySelector('#canvas').width;
-	var h = document.querySelector('#canvas').height;
-	var min = Math.min(w, h);
 	var img = new Image();
 	img.src = 'static/color_wheel.png';
-	img.onload = function () {
+	img.onload = imgSize;
+	function imgSize () {
+		var canvas = document.getElementById('canvas');
+		canvas.setAttribute('width', window.innerWidth);
+		canvas.setAttribute('height', window.innerHeight);
+		var w = canvas.width;
+		var h = canvas.height;
+		var min = Math.min(w, h);
 		ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
 	}
+	window.addEventListener('resize', imgSize);
 }
 function monitorHandler () {
 	var x, y, z, myInterval;
