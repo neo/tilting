@@ -62,7 +62,7 @@ function controlHandler () {
 		socket.emit('pick', rgba);
 	}
 	var img = new Image();
-	img.src = 'static/color_wheel.png';
+	img.src = 'static/img/color_wheel.jpg';
 	img.onload = imgSize;
 	function imgSize () {
 		canvas.setAttribute('width', window.innerWidth);
@@ -73,7 +73,7 @@ function controlHandler () {
 		// ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
 		// Anti-aliasing
 		ctx.beginPath();
-		ctx.arc(w/2, h/2, min/2, 0, 2*Math.PI);
+		ctx.arc(w/2, h/2, min/2-5, 0, 2*Math.PI);
 		ctx.clip();
 	}
 	window.addEventListener('resize', imgSize);
