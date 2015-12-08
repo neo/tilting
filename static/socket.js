@@ -44,7 +44,8 @@ function controlHandler () {
 	window.addEventListener('deviceorientation', function (e) {
 		var x = e.beta - init.x;
 		var y = e.gamma - init.y;
-		var data = {x: x, y: y, z: e.alpha};
+		var z = e.alpha;
+		var data = {x: x, y: y, z: z};
 		socket.emit('tilt', data);
 	});
 	var canvas = document.getElementById('canvas');
@@ -64,7 +65,6 @@ function controlHandler () {
 	img.src = 'static/color_wheel.png';
 	img.onload = imgSize;
 	function imgSize () {
-		var canvas = document.getElementById('canvas');
 		canvas.setAttribute('width', window.innerWidth);
 		canvas.setAttribute('height', window.innerHeight);
 		var w = canvas.width;
