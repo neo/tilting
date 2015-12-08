@@ -8,15 +8,17 @@ function canvas () {
 	art = new createjs.Graphics();
 	stage.addChild(new createjs.Shape(art));
 
-	art.s('#000').mt(stageW/2, stageH/2);
+	art.s('#fff').ss(10, 1, 1).mt(stageW/2, stageH/2);
 
 	stage.update();
 }
 
+var cx, cy, tx, ty;
 function create (x, y, z, rgba) {
-	a = art.command.x + y;
-	b = art.command.y + x;
-	art.lt(a, b);
+	cx = art.command.x;
+	cy = art.command.y;
+	tx = cx + y / 5;
+	ty = cy + x / 5;
+	art.s(rgba).mt(cx, cy).lt(tx, ty);
 	stage.update();
-	console.log(rgba);
 }

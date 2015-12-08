@@ -49,7 +49,7 @@ function controlHandler () {
 		var x = e.touches[0].clientX;
 		var y = e.touches[0].clientY;
 		var data = ctx.getImageData(x, y, 1, 1).data;
-		var rgba = 'rgba(' + data[0] + ', ' + data[1] + ', ' + data[2] + ', ' + data[3] + ')';
+		var rgba = 'rgba(' + data[0] + ', ' + data[1] + ', ' + data[2] + ', ' + data[3] / 255 + ')';
 		socket.emit('pick', rgba);
 	}
 	var w = document.querySelector('#canvas').width;
@@ -79,14 +79,14 @@ function monitorHandler (target) {
 		x = data.x;
 		y = data.y;
 		z = data.z;
-		var rgba;
+		var rgba = 'rgba(0,0,0,1)';
 		socket.on('pick', function (data) {
 			rgba = data;
 		});
 		if(!myInterval) {
 			myInterval = setInterval(function () {
 				create(x, y, z, rgba);
-			}, 100);
+			}, 10);
 		}
 	});
 }
