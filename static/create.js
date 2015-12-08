@@ -8,7 +8,7 @@ function canvas () {
 	art = new createjs.Graphics();
 	stage.addChild(new createjs.Shape(art));
 
-	art.s('#fff').ss(10, 1, 1).mt(stageW/2, stageH/2);
+	art.ss(10, 1, 1).mt(stageW/2, stageH/2);
 
 	stage.update();
 }

@@ -79,7 +79,7 @@ function monitorHandler (target) {
 		x = data.x;
 		y = data.y;
 		z = data.z;
-		var rgba = 'rgba(0,0,0,1)';
+		var rgba = 'rgba(255,255,255,1)';
 		socket.on('pick', function (data) {
 			rgba = data;
 		});
