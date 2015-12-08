@@ -22,14 +22,19 @@ function device (e) {
 	} else {
 		theOther.style.width = 0;
 	}
-	setTimeout(function () {
-		var canvas = document.createElement('canvas');
-		canvas.setAttribute('id', 'canvas');
+	var canvas = document.createElement('canvas');
+	canvas.setAttribute('id', 'canvas');
+	target.appendChild(canvas);
+	setTimeout(canvasSize, 300);
+	function canvasSize () {
+		var canvas = document.getElementById('canvas');
 		canvas.setAttribute('width', window.innerWidth);
 		canvas.setAttribute('height', window.innerHeight);
-		target.appendChild(canvas);
-		handler();
-	}, 300);
+		theOther.style.height = 0;
+		theOther.style.width = 0;
+	}
+	setTimeout(handler, 350);
+	window.addEventListener('resize', canvasSize);
 	target.removeEventListener('click', device);
 }
 function controlHandler () {
@@ -50,12 +55,13 @@ function controlHandler () {
 		var rgba = 'rgba(' + data[0] + ', ' + data[1] + ', ' + data[2] + ', ' + data[3] / 255 + ')';
 		socket.emit('pick', rgba);
 	}
-	var w = document.querySelector('#canvas').width;
-	var h = document.querySelector('#canvas').height;
-	var min = Math.min(w, h);
 	var img = new Image();
 	img.src = 'static/color_wheel.png';
-	img.onload = function () {
+	img.onload = imgSize;
+	function imgSize () {
+		var w = document.querySelector('#canvas').width;
+		var h = document.querySelector('#canvas').height;
+		var min = Math.min(w, h);
 		ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
 	}
 }

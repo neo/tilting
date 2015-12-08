@@ -17,7 +17,8 @@ html, body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	transition: all 0.3s;
+	transition-duration: 0.3s;
+	transition-property: width;
 }
 .half:first-child {
 	background: #000;
@@ -26,6 +27,10 @@ html, body {
 .half:last-child {
 	background: #fff;
 	color: #000;
+}
+#canvas {
+	width: 100%;
+	height: 100%;
 }
 .text {
 	text-transform: uppercase;
@@ -37,5 +42,8 @@ html, body {
 @media screen and (orientation: portrait) {
 	.container {
 		flex-direction: column;
+	}
+	.half {
+		transition-property: height;
 	}
 }
