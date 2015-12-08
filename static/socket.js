@@ -7,12 +7,10 @@ function device (e) {
 	var target = e.currentTarget;
 	switch (target) {
 		case(control):
-			// controlHandler();
 			var handler = controlHandler;
 			var theOther = monitor;
 			break;
 		case(monitor):
-			// monitorHandler(target);
 			var handler = monitorHandler;
 			var theOther = control;
 			break;
@@ -30,7 +28,7 @@ function device (e) {
 		canvas.setAttribute('width', window.innerWidth);
 		canvas.setAttribute('height', window.innerHeight);
 		target.appendChild(canvas);
-		handler(target);
+		handler();
 	}, 300);
 	target.removeEventListener('click', device);
 }
@@ -61,18 +59,7 @@ function controlHandler () {
 		ctx.drawImage(img, (w-min)/2, (h-min)/2, min, min);
 	}
 }
-function monitorHandler (target) {
-	socket.on('tilt', function (data) {
-		var x = data.x;
-		var y = data.y;
-		var z = data.z > 180 ? data.z - 360 : data.z;
-		var rgb = 'rgb(' + math(x) + ', ' + math(y) + ', ' + math(z) + ')';
-		// target.style.background = rgb;
-		// console.log(rgb);
-	});
-	function math (n) {
-		return Math.max(Math.min(Math.round((n * 2 + 180) * (255 / 360)), 255), 0);
-	}
+function monitorHandler () {
 	var x, y, z, myInterval;
 	canvas();
 	socket.on('tilt', function (data) {
