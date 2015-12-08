@@ -22,4 +22,4 @@ io.on('connection', function (socket) {
 	socket.on('pick', function (data) {
 		socket.broadcast.emit('pick', data);
 	});
-})
+});

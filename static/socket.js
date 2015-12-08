@@ -73,7 +73,20 @@ function monitorHandler (target) {
 	function math (n) {
 		return Math.max(Math.min(Math.round((n * 2 + 180) * (255 / 360)), 255), 0);
 	}
-	socket.on('pick', function (rgba) {
-		console.log(rgba);
+	var x, y, z, myInterval;
+	canvas();
+	socket.on('tilt', function (data) {
+		x = data.x;
+		y = data.y;
+		z = data.z;
+		var rgba;
+		socket.on('pick', function (data) {
+			rgba = data;
+		});
+		if(!myInterval) {
+			myInterval = setInterval(function () {
+				create(x, y, z, rgba);
+			}, 100);
+		}
 	});
 }
