@@ -29,6 +29,8 @@ function device (e) {
 		canvas.setAttribute('height', window.innerHeight);
 		target.appendChild(canvas);
 		handler();
+		theOther.style.width = 0;
+		theOther.style.height = 0;
 	}, 300);
 	target.removeEventListener('click', device);
 }
