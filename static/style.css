@@ -27,9 +27,6 @@ html, body {
 	background: #fff;
 	color: #000;
 }
-canvas {
-	background: #616161;
-}
 .text {
 	text-transform: uppercase;
 	font-family: sans-serif;
