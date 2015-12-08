@@ -35,8 +35,16 @@ function device (e) {
 	target.removeEventListener('click', device);
 }
 function controlHandler () {
+	window.addEventListener('deviceorientation', initialOrientation);
+	var init;
+	function initialOrientation (e) {
+		window.removeEventListener('deviceorientation', initialOrientation);
+		init = {x: e.beta, y: e.gamma, z: e.alpha};
+	}
 	window.addEventListener('deviceorientation', function (e) {
-		var data = {x: e.beta, y: e.gamma, z: e.alpha};
+		var x = e.beta - init.x;
+		var y = e.gamma - init.y;
+		var data = {x: x, y: y, z: e.alpha};
 		socket.emit('tilt', data);
 	});
 	var canvas = document.getElementById('canvas');
