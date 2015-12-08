@@ -14,8 +14,8 @@ function canvas () {
 }
 
 function create (x, y, z, rgba) {
-	a = art.command.x + y / 5;
-	b = art.command.y + x / 5;
+	a = art.command.x + y;
+	b = art.command.y + x;
 	art.lt(a, b);
 	stage.update();
 	console.log(rgba);
