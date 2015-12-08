@@ -17,8 +17,8 @@ var cx, cy, tx, ty;
 function create (x, y, z, rgba) {
 	cx = art.command.x;
 	cy = art.command.y;
-	tx = cx + y / 5;
-	ty = cy + x / 5;
+	tx = Math.min(Math.max((cx + y / 5), 0), stageW);
+	ty = Math.min(Math.max((cy + x / 5), 0), stageH);
 	art.s(rgba).mt(cx, cy).lt(tx, ty);
 	stage.update();
 }
