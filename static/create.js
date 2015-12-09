@@ -1,7 +1,7 @@
 var stage, stageW, stageH, art;
 var stroke = 10
 
-function canvas () {
+function create () {
 	stage = new createjs.Stage('canvas');
 	stageW = stage.canvas.width;
 	stageH = stage.canvas.height;
@@ -26,8 +26,8 @@ function canvas () {
 var cx, cy, tx, ty;
 var ratio = 5;
 
-function create (x, y, z, rgba) {
-	if(!art) canvas();
+function draw (x, y, z, rgba) {
+	if(!art) create();
 	cx = art.command.x;
 	cy = art.command.y;
 	tx = Math.min(Math.max((cx + y / ratio), 0), stageW);

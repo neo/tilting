@@ -23,7 +23,7 @@ function device (e) {
 		theOther.style.width = 0;
 	}
 	setTimeout(function () {
-		var canvas = document.createElement('canvas');
+		canvas = document.createElement('canvas');
 		canvas.setAttribute('id', 'canvas');
 		canvas.setAttribute('width', window.innerWidth);
 		canvas.setAttribute('height', window.innerHeight);
@@ -49,7 +49,7 @@ function controlHandler () {
 		var data = {x: x, y: y, z: z};
 		socket.emit('tilt', data);
 	});
-	var canvas = document.getElementById('canvas');
+	// var canvas = document.getElementById('canvas');
 	canvas.addEventListener('touchstart', pick);
 	canvas.addEventListener('touchmove', pick);
 	// canvas.addEventListener('touchend', pick);
@@ -93,7 +93,7 @@ function controlHandler () {
 function monitorHandler () {
 	var x, y, z, myInterval;
 	socket.on('init', function (data) {
-		canvas();
+		create();
 	});
 	socket.on('tilt', function (data) {
 		x = data.x;
@@ -105,7 +105,7 @@ function monitorHandler () {
 		});
 		if(!myInterval) {
 			myInterval = setInterval(function () {
-				create(x, y, z, rgba);
+				draw(x, y, z, rgba);
 			}, 10);
 		}
 	});
