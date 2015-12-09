@@ -1,3 +1,4 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto+Condensed:300);
 * {
 	margin: 0;
 	padding: 0;
@@ -29,9 +30,7 @@ html, body {
 }
 .text {
 	text-transform: uppercase;
-	font-family: sans-serif;
-	/*color: #fff;*/
-	font-weight: bold;
+	font-family: 'Roboto Condensed', sans-serif;
 	font-size: 2em;
 }
 @media screen and (orientation: portrait) {
