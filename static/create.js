@@ -27,6 +27,7 @@ var cx, cy, tx, ty;
 var ratio = 5;
 
 function create (x, y, z, rgba) {
+	if(!art) canvas();
 	cx = art.command.x;
 	cy = art.command.y;
 	tx = Math.min(Math.max((cx + y / ratio), 0), stageW);

@@ -12,10 +12,9 @@ app.get('/', function (req, res) {
 app.use('/static', express.static('static'));
 
 io.on('connection', function (socket) {
-	// console.log('a user connected');
-	// socket.on('disconnect', function () {
-	// 	console.log('user disconnected');
-	// })
+	socket.on('init', function (data) {
+		socket.broadcast.emit('init', data);
+	});
 	socket.on('tilt', function (data) {
 		socket.broadcast.emit('tilt', data);
 	});

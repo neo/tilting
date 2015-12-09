@@ -40,6 +40,7 @@ function controlHandler () {
 	function initialOrientation (e) {
 		window.removeEventListener('deviceorientation', initialOrientation);
 		init = {x: e.beta, y: e.gamma, z: e.alpha};
+		socket.emit('init', init);
 	}
 	window.addEventListener('deviceorientation', function (e) {
 		var x = e.beta - init.x;
@@ -91,7 +92,9 @@ function controlHandler () {
 }
 function monitorHandler () {
 	var x, y, z, myInterval;
-	canvas();
+	socket.on('init', function (data) {
+		canvas();
+	});
 	socket.on('tilt', function (data) {
 		x = data.x;
 		y = data.y;
