@@ -92,10 +92,13 @@ function controlHandler () {
 }
 function monitorHandler () {
 	var x, y, z, myInterval;
+	var control = false;
 	socket.on('init', function (data) {
+		control = true;
 		create();
 	});
 	socket.on('tilt', function (data) {
+		control = true;
 		x = data.x;
 		y = data.y;
 		z = data.z;
@@ -109,4 +112,28 @@ function monitorHandler () {
 			}, 10);
 		}
 	});
+	var ctx = canvas.getContext('2d');
+	var img = new Image();
+	img.src = 'static/img/phone.png';
+	img.onload = function () {
+		var sx, sy, sw, sh, dx, dy, dw, dh;
+		if(canvas.width > 480) {
+			sx = sy = 0;
+			sw = img.width;
+			sh = img.height;
+			dh = Math.min(sh, canvas.height / 2);
+		} else {
+			sx = 40;
+			sy = 127.5;
+			sw = 400;
+			sh = 700;
+			dh = Math.min(sh, canvas.height);
+		}
+		dw = dh * img.width / img.height;
+		dy = (canvas.height - dh) / 2;
+		dx = (canvas.width - dw) / 2;
+		setTimeout(function () {
+			if(!control) ctx.drawImage(img, sx, sy, sw, sh, dx, dy, dw, dh);
+		}, 10);
+	}
 }
