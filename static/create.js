@@ -15,15 +15,21 @@ function create () {
 	createjs.Ticker.on("tick", stage);
 	createjs.Tween.get(bg).to({alpha: 1}, 700);
 
-	art = new createjs.Graphics();
-	stage.addChild(new createjs.Shape(art));
-
-	art.ss(stroke, 1, 1).mt(stageW/2, stageH/2);
+	lineNum = 10;
+	lines = [];
+	dx = [];
+	dy = [];
+	for (var i = 0; i < lineNum; i++) {
+		var line = new createjs.Graphics();
+		lines.push(line);
+		stage.addChild(new createjs.Shape(line));
+		line.mt(stageW/2, stageH/2);
+		var ratio = i / 10 + 0.1;
+		dx.push(new Damp(ratio));
+		dy.push(new Damp(ratio));
+	}
 
 	stage.update();
-
-	dx = new Damp();
-	dy = new Damp();
 }
 
 var cx, cy, tx, ty;
@@ -31,13 +37,17 @@ var ratio = 5;
 
 function draw (x, y, z, rgba) {
 	if(!art) create();
-	cx = art.command.x;
-	cy = art.command.y;
-	x = dx.damp(x / ratio);
-	y = dy.damp(y / ratio);
-	tx = Math.min(Math.max((cx + y), 0), stageW);
-	ty = Math.min(Math.max((cy + x), 0), stageH);
-	art.s(rgba).mt(cx, cy).lt(tx, ty);
+
+	for (var i = lines.length - 1; i >= 0; i--) {
+		cx = lines[i].command.x;
+		cy = lines[i].command.y;
+		tx = dy[i].damp(y/ratio);
+		ty = dx[i].damp(x/ratio);
+		tx = Math.min(Math.max((cx + tx), 0), stageW);
+		ty = Math.min(Math.max((cy + ty), 0), stageH);
+		lines[i].s(rgba).mt(cx, cy).lt(tx, ty);
+	};
+
 	stage.update();
 }
 
