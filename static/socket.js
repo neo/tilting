@@ -36,16 +36,11 @@ function device (e) {
 }
 function controlHandler () {
 	window.addEventListener('deviceorientation', initialOrientation);
-	var init, accelerometer;
+	var init;
 	function initialOrientation (e) {
 		window.removeEventListener('deviceorientation', initialOrientation);
 		init = {x: e.beta, y: e.gamma, z: e.alpha};
 		socket.emit('init', init);
-		if(!e.beta && !e.gamma && !e.alpha) {
-			accelerometer = false;
-		} else {
-			accelerometer = true;
-		}
 	}
 	window.addEventListener('deviceorientation', function (e) {
 		var x = e.beta - init.x;
@@ -91,7 +86,7 @@ function controlHandler () {
 		ctx.save();
 		ctx.translate(canvas.width/2,canvas.height/2);
 		ctx.rotate(z*Math.PI/180);
-		if(accelerometer) ctx.drawImage(img, -min/2, -min/2, min, min);
+		ctx.drawImage(img, -min/2, -min/2, min, min);
 		ctx.restore();
 	}
 }
