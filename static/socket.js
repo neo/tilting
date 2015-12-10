@@ -85,17 +85,10 @@ function controlHandler () {
 		ctx.clearRect(0,0,canvas.width,canvas.height);
 		ctx.save();
 		ctx.translate(canvas.width/2,canvas.height/2);
+		ctx.rotate(z*Math.PI/180);
 		if(z) {
-			ctx.rotate(z*Math.PI/180);
 			ctx.drawImage(img, -min/2, -min/2, min, min);
 		} else {
-			noAccelerometer = true;
-		}
-		ctx.restore();
-		var noAccelerometer;
-		if(noAccelerometer) {
-			ctx.save();
-			ctx.translate(canvas.width/2,canvas.height/2);
 			ctx.font = "48px 'Josefin Sans'";
 			ctx.fillStyle = "#fff";
 			ctx.textAlign = "center";
@@ -105,8 +98,8 @@ function controlHandler () {
 			canvas.addEventListener('click', function () {
 				document.location.reload();
 			});
-			ctx.restore();
 		}
+		ctx.restore();
 	}
 }
 function monitorHandler () {
