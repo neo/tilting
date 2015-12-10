@@ -16,7 +16,7 @@ function create () {
 	createjs.Ticker.on("tick", stage);
 	createjs.Tween.get(bg).to({alpha: 1}, 700);
 
-	lineNum = 10;
+	lineNum = 13;
 	lines = [];
 	dx = [];
 	dy = [];
@@ -25,7 +25,7 @@ function create () {
 		lines.push(line);
 		stage.addChild(new createjs.Shape(line));
 		line.mt(stageW/2, stageH/2);
-		var ratio = i / 10 + 0.1;
+		var ratio = i / 20 + .2;
 		dx.push(new Damp(ratio));
 		dy.push(new Damp(ratio));
 	}
@@ -34,7 +34,7 @@ function create () {
 }
 
 var cx, cy, tx, ty;
-var ratio = 5;
+var ratio = 2;
 
 function draw (x, y, z, rgba) {
 	if(!lines) create();
