@@ -86,7 +86,19 @@ function controlHandler () {
 		ctx.save();
 		ctx.translate(canvas.width/2,canvas.height/2);
 		ctx.rotate(z*Math.PI/180);
-		ctx.drawImage(img, -min/2, -min/2, min, min);
+		if(z) {
+			ctx.drawImage(img, -min/2, -min/2, min, min);
+		} else {
+			ctx.font = "48px 'Josefin Sans'";
+			ctx.fillStyle = "#fff";
+			ctx.textAlign = "center";
+			ctx.fillText("Accelerometer not found.", 0, -60);
+			ctx.fillText("Please click anywhere to refresh,", 0, 0);
+			ctx.fillText("and choose the monitor.", 0, 60);
+			canvas.addEventListener('click', function () {
+				document.location.reload();
+			});
+		}
 		ctx.restore();
 	}
 }
