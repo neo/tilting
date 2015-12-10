@@ -1,11 +1,12 @@
 var stage, stageW, stageH;
-var lineNum, lines, dx, dy;
+var lineNum, lines;
 var stroke = 10
 
 function create () {
 	stage = new createjs.Stage('canvas');
 	stageW = stage.canvas.width;
 	stageH = stage.canvas.height;
+	stage.clear();
 
 	var bg = new createjs.Shape();
 	bg.graphics.f('#424242').dr(0, 0, stageW, stageH);
@@ -18,16 +19,14 @@ function create () {
 
 	lineNum = 13;
 	lines = [];
-	dx = [];
-	dy = [];
 	for (var i = 0; i < lineNum; i++) {
 		var line = new createjs.Graphics();
 		lines.push(line);
 		stage.addChild(new createjs.Shape(line));
 		line.mt(stageW/2, stageH/2);
 		var ratio = i / 20 + .2;
-		dx.push(new Damp(ratio));
-		dy.push(new Damp(ratio));
+		line.dx = new Damp(ratio);
+		line.dy = new Damp(ratio);
 	}
 
 	stage.update();
@@ -42,8 +41,8 @@ function draw (x, y, z, rgba) {
 	for (var i = lines.length - 1; i >= 0; i--) {
 		cx = lines[i].command.x;
 		cy = lines[i].command.y;
-		tx = dy[i].damp(y/ratio);
-		ty = dx[i].damp(x/ratio);
+		tx = lines[i].dy.damp(y/ratio);
+		ty = lines[i].dx.damp(x/ratio);
 		tx = Math.min(Math.max((cx + tx), 0), stageW);
 		ty = Math.min(Math.max((cy + ty), 0), stageH);
 		lines[i].s(rgba).mt(cx, cy).lt(tx, ty);
