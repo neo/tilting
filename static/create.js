@@ -21,6 +21,9 @@ function create () {
 	art.ss(stroke, 1, 1).mt(stageW/2, stageH/2);
 
 	stage.update();
+
+	dx = new Damp();
+	dy = new Damp();
 }
 
 var cx, cy, tx, ty;
@@ -30,8 +33,18 @@ function draw (x, y, z, rgba) {
 	if(!art) create();
 	cx = art.command.x;
 	cy = art.command.y;
-	tx = Math.min(Math.max((cx + y / ratio), 0), stageW);
-	ty = Math.min(Math.max((cy + x / ratio), 0), stageH);
+	x = dx.damp(x / ratio);
+	y = dy.damp(y / ratio);
+	tx = Math.min(Math.max((cx + y), 0), stageW);
+	ty = Math.min(Math.max((cy + x), 0), stageH);
 	art.s(rgba).mt(cx, cy).lt(tx, ty);
 	stage.update();
+}
+
+var Damp = function(ratio, startValue) {
+	this.ratio = ratio ? ratio : .1;
+	this.lastValue = startValue ? startValue : 0;
+	this.damp = function(targetValue) {
+		return this.lastValue = this.lastValue + (targetValue - this.lastValue) * this.ratio;
+	}
 }
