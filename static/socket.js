@@ -91,23 +91,22 @@ function controlHandler () {
 		ctx.arc(w/2, h/2, min/2-5, 0, 2*Math.PI);
 		ctx.clip();
 	}
-	window.addEventListener('resize', function () {
+	function imgResize () {
 		canvas.setAttribute('width', window.innerWidth);
 		canvas.setAttribute('height', window.innerHeight);
 		imgSize();
-	});
-	window.addEventListener('deviceorientation', imgRotate);
+	}
+	if(accelerometer) window.addEventListener('resize', imgResize);
+	if(accelerometer) window.addEventListener('deviceorientation', imgRotate);
 	function imgRotate (e) {
 		var z = e.alpha;
 		var min = Math.min(canvas.width, canvas.height);
-		if(z) {
-			ctx.clearRect(0,0,canvas.width,canvas.height);
-			ctx.save();
-			ctx.translate(canvas.width/2,canvas.height/2);
-			ctx.rotate(z*Math.PI/180);
-			ctx.drawImage(img, -min/2, -min/2, min, min);
-			ctx.restore();
-		}
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.save();
+		ctx.translate(canvas.width/2,canvas.height/2);
+		ctx.rotate(z*Math.PI/180);
+		ctx.drawImage(img, -min/2, -min/2, min, min);
+		ctx.restore();
 	}
 }
 function monitorHandler () {
