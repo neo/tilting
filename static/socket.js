@@ -81,15 +81,14 @@ function controlHandler () {
 	window.addEventListener('deviceorientation', imgRotate);
 	function imgRotate (e) {
 		var z = e.alpha;
-		if(z - init.z != 0) {
-			var min = Math.min(canvas.width, canvas.height);
-			ctx.clearRect(0,0,canvas.width,canvas.height);
-			ctx.save();
-			ctx.translate(canvas.width/2,canvas.height/2);
-			ctx.rotate(z*Math.PI/180);
+		var min = Math.min(canvas.width, canvas.height);
+		ctx.clearRect(0,0,canvas.width,canvas.height);
+		ctx.save();
+		ctx.translate(canvas.width/2,canvas.height/2);
+		ctx.rotate(z*Math.PI/180);
+		if(z) {
 			ctx.drawImage(img, -min/2, -min/2, min, min);
 		} else {
-			window.removeEventListener('deviceorientation', imgRotate);
 			ctx.font = "48px 'Josefin Sans'";
 			ctx.fillStyle = "#fff";
 			ctx.textAlign = "center";
