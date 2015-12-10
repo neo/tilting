@@ -129,7 +129,7 @@ function monitorHandler () {
 			sh = 700;
 			dh = Math.min(sh, canvas.height);
 		}
-		dw = dh * img.width / img.height;
+		dw = dh * sw / sh;
 		dy = (canvas.height - dh) / 2;
 		dx = (canvas.width - dw) / 2;
 		setTimeout(function () {
