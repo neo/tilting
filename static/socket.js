@@ -89,6 +89,7 @@ function controlHandler () {
 		if(z) {
 			ctx.drawImage(img, -min/2, -min/2, min, min);
 		} else {
+			window.removeEventListener('deviceorientation', imgRotate);
 			ctx.font = "48px 'Josefin Sans'";
 			ctx.fillStyle = "#fff";
 			ctx.textAlign = "center";
