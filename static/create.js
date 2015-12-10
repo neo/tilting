@@ -26,7 +26,7 @@ function create () {
 		line.mt(stageW/2, stageH/2);
 		var ratio = i / 20 + .2;
 		line.dx = new Damp(ratio);
-		line.dy = new Damp(ratio);
+		line.dy = new Damp(1 - ratio);
 	}
 
 	stage.update();
