@@ -36,11 +36,27 @@ function device (e) {
 }
 function controlHandler () {
 	window.addEventListener('deviceorientation', initialOrientation);
-	var init;
+	var init, accelerometer;
 	function initialOrientation (e) {
 		window.removeEventListener('deviceorientation', initialOrientation);
 		init = {x: e.beta, y: e.gamma, z: e.alpha};
 		socket.emit('init', init);
+		if(e.alpha) {
+			accelerometer = true;
+		} else {
+			ctx.save();
+			ctx.translate(canvas.width/2,canvas.height/2);
+			ctx.font = "48px 'Josefin Sans'";
+			ctx.fillStyle = "#fff";
+			ctx.textAlign = "center";
+			ctx.fillText("Accelerometer not found.", 0, -60);
+			ctx.fillText("Please click anywhere to refresh,", 0, 0);
+			ctx.fillText("and choose the monitor.", 0, 60);
+			canvas.addEventListener('click', function () {
+				document.location.reload();
+			});
+			ctx.restore();
+		}
 	}
 	window.addEventListener('deviceorientation', function (e) {
 		var x = e.beta - init.x;
