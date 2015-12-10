@@ -17,16 +17,16 @@ function create () {
 	createjs.Ticker.on("tick", stage);
 	createjs.Tween.get(bg).to({alpha: 1}, 700);
 
-	lineNum = 13;
+	lineNum = 11;
 	lines = [];
 	for (var i = 0; i < lineNum; i++) {
 		var line = new createjs.Graphics();
 		lines.push(line);
 		stage.addChild(new createjs.Shape(line));
 		line.mt(stageW/2, stageH/2);
-		var ratio = i / 20 + .2;
-		line.dx = new Damp(ratio);
-		line.dy = new Damp(1 - ratio);
+		var ratio = 0.25 + 0.05 * i;
+		line.dx = new Damp(1 - ratio);
+		line.dy = new Damp(ratio);
 	}
 
 	stage.update();
