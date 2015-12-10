@@ -1,4 +1,5 @@
-var stage, stageW, stageH, art;
+var stage, stageW, stageH;
+var lineNum, lines, dx, dy;
 var stroke = 10
 
 function create () {
@@ -36,7 +37,7 @@ var cx, cy, tx, ty;
 var ratio = 5;
 
 function draw (x, y, z, rgba) {
-	if(!art) create();
+	if(!lines) create();
 
 	for (var i = lines.length - 1; i >= 0; i--) {
 		cx = lines[i].command.x;
