@@ -55,7 +55,7 @@ function controlHandler () {
 	// canvas.addEventListener('touchend', pick);
 	var ctx = canvas.getContext('2d');
 	function pick (e) {
-		if(e.preventDefault) e.preventDefault();
+		if(e.preventDefault && e.type == 'touchmove') e.preventDefault();
 		var x = e.touches[0].clientX;
 		var y = e.touches[0].clientY;
 		var data = ctx.getImageData(x, y, 1, 1).data;
@@ -66,8 +66,6 @@ function controlHandler () {
 	img.src = 'static/img/color_wheel.jpg';
 	img.onload = imgSize;
 	function imgSize () {
-		canvas.setAttribute('width', window.innerWidth);
-		canvas.setAttribute('height', window.innerHeight);
 		var w = canvas.width;
 		var h = canvas.height;
 		var min = Math.min(w, h);
@@ -77,29 +75,23 @@ function controlHandler () {
 		ctx.arc(w/2, h/2, min/2-5, 0, 2*Math.PI);
 		ctx.clip();
 	}
-	window.addEventListener('resize', imgSize);
+	window.addEventListener('resize', function () {
+		canvas.setAttribute('width', window.innerWidth);
+		canvas.setAttribute('height', window.innerHeight);
+		imgSize();
+	});
 	window.addEventListener('deviceorientation', imgRotate);
 	function imgRotate (e) {
 		var z = e.alpha;
 		var min = Math.min(canvas.width, canvas.height);
-		ctx.clearRect(0,0,canvas.width,canvas.height);
-		ctx.save();
-		ctx.translate(canvas.width/2,canvas.height/2);
-		ctx.rotate(z*Math.PI/180);
 		if(z) {
+			ctx.clearRect(0,0,canvas.width,canvas.height);
+			ctx.save();
+			ctx.translate(canvas.width/2,canvas.height/2);
+			ctx.rotate(z*Math.PI/180);
 			ctx.drawImage(img, -min/2, -min/2, min, min);
-		} else {
-			ctx.font = "48px 'Josefin Sans'";
-			ctx.fillStyle = "#fff";
-			ctx.textAlign = "center";
-			ctx.fillText("Accelerometer not found.", 0, -60);
-			ctx.fillText("Please click anywhere to refresh,", 0, 0);
-			ctx.fillText("and choose the monitor.", 0, 60);
-			canvas.addEventListener('click', function () {
-				document.location.reload();
-			});
+			ctx.restore();
 		}
-		ctx.restore();
 	}
 }
 function monitorHandler () {
