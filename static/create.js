@@ -30,6 +30,8 @@ function create () {
 	}
 
 	stage.update();
+
+	cursor = new createjs.Shape(new createjs.Graphics().s('#fff').dc(0,0,10));
 }
 
 var cx, cy, tx, ty;
@@ -47,6 +49,14 @@ function draw (x, y, z, rgba) {
 		ty = Math.min(Math.max((cy + ty), 0), stageH);
 		lines[i].s(rgba).mt(cx, cy).lt(tx, ty);
 	};
+
+	if(rgba == 'rgba(0, 0, 0, 0)') {
+		stage.addChild(cursor);
+		cursor.x = tx;
+		cursor.y = ty;
+	} else {
+		stage.removeChild(cursor);
+	}
 
 	stage.update();
 }
