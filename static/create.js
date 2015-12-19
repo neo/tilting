@@ -36,8 +36,9 @@ function create () {
 	setInterval(function () {
 		for (var i = lines.length - 1; i >= 0; i--) {
 			lines[i].cache(0,0,stageW,stageH);
+			lines[i].clear();
 		};
-	}, 10000);
+	}, 1000);
 }
 
 var cx, cy, tx, ty;
