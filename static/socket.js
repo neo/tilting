@@ -75,7 +75,7 @@ function controlHandler () {
 		var x = e.touches[0].clientX;
 		var y = e.touches[0].clientY;
 		var data = ctx.getImageData(x, y, 1, 1).data;
-		var rgba = 'rgba(' + data[0] + ', ' + data[1] + ', ' + data[2] + ', ' + data[3] / 255 + ')';
+		var rgba = {r:data[0], g:data[1], b:data[2], a:data[3]/255};
 		socket.emit('pick', rgba);
 	}
 	var img = new Image();
@@ -122,7 +122,7 @@ function monitorHandler () {
 		x = data.x;
 		y = data.y;
 		z = data.z;
-		var rgba = 'rgba(255,255,255,1)';
+		var rgba = {r:255, g:255, b:255, a:1};
 		socket.on('pick', function (data) {
 			rgba = data;
 		});

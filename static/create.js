@@ -40,6 +40,8 @@ var ratio = 2;
 function draw (x, y, z, rgba) {
 	if(!lines) create();
 
+	rgba = 'rgba(' + rgba.r + ', ' + rgba.g + ', ' + rgba.b + ', ' + rgba.a + ')';
+
 	for (var i = lines.length - 1; i >= 0; i--) {
 		cx = lines[i].command.x;
 		cy = lines[i].command.y;
