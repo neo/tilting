@@ -31,14 +31,7 @@ function create () {
 
 	stage.update();
 
-	cursor = new createjs.Shape(new createjs.Graphics().s('#aaa').dc(0,0,10));
-
-	setInterval(function () {
-		for (var i = lines.length - 1; i >= 0; i--) {
-			lines[i].cache(0,0,stageW,stageH);
-			lines[i].clear();
-		};
-	}, 1000);
+	cursor = new createjs.Shape(new createjs.Graphics().s('#fff').dc(0,0,10));
 }
 
 var cx, cy, tx, ty;
