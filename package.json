@@ -1,19 +1,13 @@
 {
-  "name": "first",
+  "name": "Tilting",
   "version": "1.0.0",
-  "description": "first test",
+  "description": "Tilt to draw",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://neolwc@bitbucket.org/neolwc/first.git"
   },
   "author": "Neo",
   "license": "ISC",
-  "homepage": "https://bitbucket.org/neolwc/first#readme",
   "dependencies": {
     "express": "^4.13.3",
     "socket.io": "^1.3.7"
